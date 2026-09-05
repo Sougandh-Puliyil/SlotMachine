@@ -508,7 +508,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 288.99997, y: -420.00006}
+  m_AnchoredPosition: {x: -8.000006, y: -195}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &332325674
@@ -585,8 +585,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 50858f67c9e6ab8fabb99d4afc337729, type: 2}
   - {fileID: 11400000, guid: 8bc6e92c2646626e5a5461e6bbf647c6, type: 2}
   - {fileID: 11400000, guid: 9313332915af47617802fad173f09b38, type: 2}
-  cycleRate: 18
-  minSpinDuration: 1.2
+  cycleRate: 10
+  minSpinDuration: 2
   stopEase:
     serializedVersion: 2
     m_Curve:
@@ -2298,8 +2298,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 50858f67c9e6ab8fabb99d4afc337729, type: 2}
   - {fileID: 11400000, guid: 8bc6e92c2646626e5a5461e6bbf647c6, type: 2}
   - {fileID: 11400000, guid: 9313332915af47617802fad173f09b38, type: 2}
-  cycleRate: 18
-  minSpinDuration: 1.2
+  cycleRate: 14
+  minSpinDuration: 2
   stopEase:
     serializedVersion: 2
     m_Curve:
@@ -2470,7 +2470,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -288.99997, y: 285.00003}
+  m_AnchoredPosition: {x: 8, y: 60}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1285895171
@@ -2494,7 +2494,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Text
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2503,10 +2503,10 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
+    m_FontSize: 20
     m_FontStyle: 1
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 0
     m_MaxSize: 40
     m_Alignment: 0
     m_AlignByGeometry: 0
@@ -3010,6 +3010,7 @@ MonoBehaviour:
   leverPulldownDuration: 0.3
   balanceText: {fileID: 1839916311}
   messageText: {fileID: 2137728243}
+  betMenuPanel: {fileID: 1877762864}
   bet10Button: {fileID: 1430258240}
   bet50Button: {fileID: 689071838}
   bet100Button: {fileID: 372064188}
@@ -3018,7 +3019,8 @@ MonoBehaviour:
   resultPopup: {fileID: 868726188}
   resultPopupText: {fileID: 1285895172}
   resultPopupCloseButton: {fileID: 325442309}
-  debugSeed: -1
+  resultPopupDelay: 1.2
+  debugSeed: 5
 --- !u!4 &1603314676
 Transform:
   m_ObjectHideFlags: 0
@@ -3184,7 +3186,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8bc6e92c2646626e5a5461e6bbf647c6, type: 2}
   - {fileID: 11400000, guid: 9313332915af47617802fad173f09b38, type: 2}
   cycleRate: 18
-  minSpinDuration: 1.2
+  minSpinDuration: 2
   stopEase:
     serializedVersion: 2
     m_Curve:
