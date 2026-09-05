@@ -6,8 +6,8 @@ using UnityEngine.UI;
 using UnityEditor;
 #endif
 
-// Top-level game controller: owns the reels, RNG, and balance, and is the only place that decides win/payout - Reel and UI scripts stay logic-free.
-public class SlotMachine : MonoBehaviour
+
+public class SlotMachine : MonoBehaviour    // Top-level game controller: owns the reels, RNG, and balance, and is the only place that decides win/payout - Reel and UI scripts stay logic-free.
 {
     [Header("Reels")]
     [Tooltip("Assign all reels left-to-right in the Inspector")]
@@ -40,8 +40,8 @@ public class SlotMachine : MonoBehaviour
     public Button exitButton;
     public Text betAmountText; // optional: shows the currently selected bet
 
-    // Hides (not just disables) the bet menu while a spin is in progress.
-    private void SetBetMenuVisible(bool visible)
+
+    private void SetBetMenuVisible(bool visible)     // Hides the bet menu while a spin is in progress.
     {
         if (betMenuPanel != null) betMenuPanel.SetActive(visible);
     }
@@ -50,7 +50,7 @@ public class SlotMachine : MonoBehaviour
     [Tooltip("The popup panel GameObject shown after every spin result (win or lose)")]
     public GameObject resultPopup;
     public Text resultPopupText;
-    public Button resultPopupCloseButton; // reuse a sliced button (e.g. the 'X' or 'YES' sprite) as an OK/dismiss button
+    public Button resultPopupCloseButton;
 
     [Tooltip("Seconds to wait after the reels stop before the result popup appears, so the player has a moment to see the landed symbols first")]
     public float resultPopupDelay = 1.2f;
@@ -64,8 +64,8 @@ public class SlotMachine : MonoBehaviour
     private int _reelsFinished;
     private bool _isSpinning;
 
-    // Runs once at startup: sets up the RNG, hands it to every reel, and wires up every button's click behaviour.
-    private void Awake()
+
+    private void Awake()    // Runs once at startup: sets up the RNG, hands it to every reel, and wires up every button's click behaviour.
     {
         _rng = debugSeed >= 0 ? new RNGService(debugSeed) : new RNGService();
         Debug.Log($"[SlotMachine] RNG initialized with seed: {(debugSeed >= 0 ? debugSeed.ToString() : "random (no fixed seed)")}");
@@ -76,10 +76,9 @@ public class SlotMachine : MonoBehaviour
             reel.Init(_rng);
         }
 
-        // The lever is the single spin trigger - no separate "Spin" button.
-        leverButton.onClick.AddListener(OnSpinPressed);
 
-        // Bet menu buttons each set a fixed bet value.
+        leverButton.onClick.AddListener(OnSpinPressed); //spin button
+
         if (bet10Button != null) bet10Button.onClick.AddListener(() => SetBet(10f));
         if (bet50Button != null) bet50Button.onClick.AddListener(() => SetBet(50f));
         if (bet100Button != null) bet100Button.onClick.AddListener(() => SetBet(100f));
@@ -94,16 +93,16 @@ public class SlotMachine : MonoBehaviour
         UpdateBetUI();
     }
 
-    // Called by the Bet 10G/50G/100G buttons; ignored mid-spin so the bet can't change after the lever's already been pulled.
-    public void SetBet(float amount)
+
+    public void SetBet(float amount)        // Called by the Bet 10G/50G/100G buttons; ignored mid-spin so the bet can't change after the lever's already been pulled.
     {
         if (_isSpinning) return;
         betAmount = amount;
         UpdateBetUI();
     }
 
-    // Called by the Exit button: stops Play mode in-editor, quits in a standalone build, and does nothing in WebGL (browsers block self-closing tabs).
-    public void OnExitPressed()
+
+    public void OnExitPressed()  // Called by the Exit button: stops Play mode in-editor, quits in a standalone build, and does nothing in WebGL (browsers block self-closing tabs).
     {
         #if UNITY_EDITOR
         EditorApplication.isPlaying = false;
@@ -114,8 +113,8 @@ public class SlotMachine : MonoBehaviour
         #endif
     }
 
-    // Called when the lever is pulled: deducts the bet (or shows a "no money" popup instead) and starts every reel spinning.
-    private void OnSpinPressed()
+
+    private void OnSpinPressed()    // Called when the lever is pulled: deducts the bet (or shows a "no money" popup instead) and starts every reel spinning.
     {
         if (_isSpinning) return;
 
@@ -148,7 +147,7 @@ public class SlotMachine : MonoBehaviour
         }
     }
 
-    // Purely visual: swaps the lever sprite down then back up, so pulling it feels tactile.
+
     private IEnumerator LeverPullAnimation()
     {
         leverImage.sprite = leverDownSprite;
@@ -156,8 +155,8 @@ public class SlotMachine : MonoBehaviour
         leverImage.sprite = leverUpSprite;
     }
 
-    // Called once per reel as it finishes; once all reels have reported in, evaluates the result.
-    private void OnReelStopped()
+
+    private void OnReelStopped()    // Called once per reel as it finishes; once all reels have reported in, evaluates the result.
     {
         _reelsFinished++;
         if (_reelsFinished < reels.Length) return; // wait for all reels
@@ -167,8 +166,8 @@ public class SlotMachine : MonoBehaviour
         EvaluateResult();
     }
 
-    // Checks whether all reels matched (jackpot) or 2+ bonus symbols landed (smaller payout), updates balance, and queues the result popup.
-    private void EvaluateResult()
+
+    private void EvaluateResult()       // Checks whether all reels matched (jackpot) or 2+ bonus symbols landed (smaller payout), updates balance, and queues the result popup.
     {
         var results = new List<SymbolData>();
         foreach (var reel in reels) results.Add(reel.ResultSymbol);
@@ -209,16 +208,16 @@ public class SlotMachine : MonoBehaviour
         StartCoroutine(ShowResultPopupAfterDelay(resultMessage));
     }
 
-    // Shows the popup with no delay - used for "no money", where there's nothing on the reels worth waiting to look at first.
-    private void ShowImmediatePopup(string message)
+
+    private void ShowImmediatePopup(string message) // Shows the popup with no delay - used for "no money", where there's nothing on the reels worth waiting to look at first.
     {
         if (resultPopup == null || resultPopupText == null) return;
         resultPopupText.text = message;
         resultPopup.SetActive(true);
     }
 
-    // Waits resultPopupDelay seconds after the reels stop (so the player sees the symbols first) before showing the result popup.
-    private IEnumerator ShowResultPopupAfterDelay(string message)
+
+    private IEnumerator ShowResultPopupAfterDelay(string message)    // Waits resultPopupDelay seconds after the reels stop (so the player sees the symbols first) before showing the result popup.
     {
         yield return new WaitForSeconds(resultPopupDelay);
 
@@ -227,20 +226,18 @@ public class SlotMachine : MonoBehaviour
         resultPopup.SetActive(true);
     }
 
-    // Called by the popup's close button: hides the popup and brings the bet menu back so the player can spin again.
-    private void OnResultPopupClosed()
+
+    private void OnResultPopupClosed()  // Called by the popup's close button: hides the popup and brings the bet menu back so the player can spin again.
     {
         resultPopup.SetActive(false);
         SetBetMenuVisible(true);
     }
 
-    // Refreshes the on-screen balance text to match the current _balance value.
     private void UpdateBalanceUI()
     {
         balanceText.text = $"Balance: {_balance:F0}";
     }
 
-    // Refreshes the on-screen bet text to match the current betAmount value, if that text field is wired up.
     private void UpdateBetUI()
     {
         if (betAmountText != null) betAmountText.text = $"Bet: {betAmount:F0}";

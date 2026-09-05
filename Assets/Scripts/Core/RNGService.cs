@@ -1,18 +1,17 @@
 using System.Collections.Generic;
 
-// Wraps System.Random (not UnityEngine.Random) so win-deciding rolls stay separate and seedable from the cosmetic reel-scramble animation.
-public class RNGService
+
+public class RNGService // Wraps System.Random so win-deciding rolls stay separate and seedable from the cosmetic reel-scramble animation.
 {
     private readonly System.Random _random;
 
-    // seed = null gives real randomness each run; a fixed number gives the same sequence every time, for testing.
-    public RNGService(int? seed = null)
+
+    public RNGService(int? seed = null) // seed = null gives real randomness each run; a fixed number gives the same sequence every time, for testing.
     {
         _random = seed.HasValue ? new System.Random(seed.Value) : new System.Random();
     }
 
-    // Picks a symbol with odds proportional to its spawnWeight (higher weight = bigger "slice" of the roll range = picked more often).
-    public SymbolData GetWeightedRandomSymbol(List<SymbolData> pool)
+    public SymbolData GetWeightedRandomSymbol(List<SymbolData> pool)    // Picks a symbol with odds proportional to its spawnWeight (higher weight = bigger "slice" of the roll range = picked more often).
     {
         int totalWeight = 0;
         foreach (var s in pool) totalWeight += s.spawnWeight;
@@ -26,7 +25,6 @@ public class RNGService
             if (roll < cumulative) return s;
         }
 
-        // Fallback - only reached due to float rounding edge cases
-        return pool[pool.Count - 1];
+        return pool[pool.Count - 1];     // Fallback - only reached due to float rounding edge cases
     }
 }
