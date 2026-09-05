@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b92bb7e5eef5965169e6baaf4626200a, type: 3}
   m_Name: Symbol_Seven
   m_EditorClassIdentifier: Assembly-CSharp::SymbolData
-  symbolId: 
-  icon: {fileID: 0}
-  payoutMultiplier: 1
+  symbolId: Seven
+  icon: {fileID: 2193077994593488821, guid: cd4ad558531d6377496fee02252a8d82, type: 3}
+  payoutMultiplier: 25
   spawnWeight: 10
-  isBonusSymbol: 0
+  isBonusSymbol: 1

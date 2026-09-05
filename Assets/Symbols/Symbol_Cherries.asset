@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b92bb7e5eef5965169e6baaf4626200a, type: 3}
   m_Name: Symbol_Cherries
   m_EditorClassIdentifier: Assembly-CSharp::SymbolData
-  symbolId: 
-  icon: {fileID: 0}
-  payoutMultiplier: 1
-  spawnWeight: 10
+  symbolId: Cherries
+  icon: {fileID: -5620835742497143143, guid: 1d89bc0448655b180ba48b6d7c8af9b3, type: 3}
+  payoutMultiplier: 2
+  spawnWeight: 40
   isBonusSymbol: 0

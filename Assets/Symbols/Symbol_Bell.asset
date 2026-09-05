@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b92bb7e5eef5965169e6baaf4626200a, type: 3}
   m_Name: Symbol_Bell
   m_EditorClassIdentifier: Assembly-CSharp::SymbolData
-  symbolId: 
-  icon: {fileID: 0}
-  payoutMultiplier: 1
-  spawnWeight: 10
+  symbolId: Bell
+  icon: {fileID: -2391669244243282240, guid: 572be872671c4ac0891eb58140ba44ed, type: 3}
+  payoutMultiplier: 5
+  spawnWeight: 30
   isBonusSymbol: 0
